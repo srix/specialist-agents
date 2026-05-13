@@ -1,0 +1,89 @@
+# {{PROJECT_NAME}} — Design System
+
+**Status:** Draft
+**Last updated:** {{TODAY}}
+**Source proposal:** <link to design-tool export folder once it exists>
+**Source of truth for product scope:** [`../specs/ui-design-brief.md`](../specs/ui-design-brief.md)
+
+This document is the engineer-facing reference for the design system. It records the system-level decisions that need to survive across screens — tokens, type, components, motion, light/dark behavior — without trying to capture every pixel. Per-screen pixel detail lives in the design tool, not here.
+
+---
+
+## Color
+
+### Surface palette
+
+| Token | Light | Dark | Usage |
+|---|---|---|---|
+| `surface/background` | <hex> | <hex> | App background |
+| `surface/elevated` | <hex> | <hex> | Cards, sheets |
+| `border/subtle` | <hex> | <hex> | Hairlines, dividers |
+| `text/primary` | <hex> | <hex> | Body, headings |
+| `text/secondary` | <hex> | <hex> | Captions, metadata |
+| `accent/primary` | <hex> | <hex> | Single restrained accent |
+
+### Semantic / category palette (optional)
+
+<!-- If the product has categorical color (e.g. activity types, status states), list them here. -->
+
+---
+
+## Typography
+
+<!-- Font family, weights, size scale. Map onto framework type slots if applicable. -->
+
+| Slot | Size | Line height | Weight |
+|---|---|---|---|
+| `display` | 32 | 40 | 600 |
+| `heading` | 22 | 28 | 600 |
+| `body` | 16 | 24 | 400 |
+| `caption` | 13 | 18 | 400 |
+
+---
+
+## Spacing & layout
+
+<!-- Spacing scale, grid, container widths. -->
+
+---
+
+## Radii & elevation
+
+<!-- Corner radii by component class; elevation/shadow tokens. -->
+
+---
+
+## Motion
+
+<!-- Durations, easing curves, principles (e.g. "no motion over 250ms"). -->
+
+---
+
+## Components
+
+<!-- Buttons, inputs, cards. Behavior states (default / hover / focus / disabled), not pixel positions. -->
+
+---
+
+## Light + dark mode
+
+<!-- Mapping rules. Which tokens swap, which stay constant. -->
+
+---
+
+## Accessibility
+
+- [ ] All text meets WCAG AA contrast at its smallest used size.
+- [ ] Focus states are visible without relying on color alone.
+- [ ] Tap targets ≥ 44×44 px (mobile) or ≥ 24×24 px keyboard-focusable area (web).
+- [ ] Color is not the only signal for state (use icon + color, not color alone).
+
+---
+
+## Decision log
+
+Append-only. Latest entries on top.
+
+### {{TODAY}} — Bootstrap
+
+Initial scaffold from `srix-scaffold`. Replace this entry as real design decisions land.

@@ -1,0 +1,34 @@
+# Design
+
+This folder is the engineer-facing reference for {{PROJECT_NAME}}'s visual design. It complements — but does not duplicate — the work done in the design tool.
+
+## Where things live
+
+| Artifact | Location |
+|---|---|
+| **Design brief** (what we asked for) | [`../specs/ui-design-brief.md`](../specs/ui-design-brief.md) |
+| **Visual designs** (screens, components) | Design tool (Figma / Stitch / Whimsical / etc.); periodic exports under [`exports/`](#exports) |
+| **Design system** (tokens, components, motion, light/dark) | [`design-system.md`](./design-system.md) |
+| **Decision log** (why we chose what) | Bottom of `design-system.md` |
+
+## Workflow
+
+1. Brief in [`../specs/ui-design-brief.md`](../specs/ui-design-brief.md) is the input.
+2. Iterate visually in the design tool. That tool is the source of truth for what screens look like; periodic exports land under `exports/`.
+3. Once a direction is agreed, distill the system-level decisions (tokens, type scale, components, motion) into `design-system.md`. This is what engineers consume when implementing.
+4. Each load-bearing visual decision (e.g. "stacked-bar over donut for daily breakdown") is logged in the Decision Log at the bottom of `design-system.md`, not duplicated elsewhere.
+
+## Exports
+
+Snapshots from the design tool live under `exports/`. Each iteration gets its own dated folder; nothing is overwritten.
+
+```
+exports/
+└── <tool>-YYYY-MM-DD/
+    ├── <screen_name>/
+    │   ├── code.html      ← HTML/CSS rendering, if the tool exports it
+    │   └── screen.png     ← static reference image
+    └── ...
+```
+
+The dated folder name makes it easy to talk about "the 2026-05-02 export" and to keep older snapshots around for comparison.

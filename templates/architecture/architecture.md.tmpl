@@ -1,0 +1,108 @@
+# Architecture
+
+**Last updated:** {{TODAY}}
+**Maintained by:** the `architect` agent ([`agents/architect.md`](../agents/architect.md)).
+
+This is the living technical reference for the {{PROJECT_NAME}} project. Every load-bearing technical decision is recorded in the Decision Log at the bottom.
+
+---
+
+## Vision (one paragraph)
+
+{{PROJECT_VISION}}
+
+For product-level scope see [`specs/REQUIREMENTS.md`](../specs/REQUIREMENTS.md). For phase sequencing see [`specs/ROADMAP.md`](../specs/ROADMAP.md).
+
+---
+
+## Layers / modules
+
+<!-- Describe each module / layer and what it owns. Below is a starter; rename, add, or remove rows. -->
+
+| Layer | Path | Owns |
+|---|---|---|
+| `<layer>` | `<path>` | <what it owns> |
+
+<!-- Dependency direction diagram. Edit nodes/arrows to match. -->
+
+```mermaid
+flowchart TD
+    a[layer-a]
+    b[layer-b]
+    a --> b
+```
+
+---
+
+## Tech stack
+
+- **Language:** <e.g. Kotlin / TypeScript / Python>
+- **Framework:** <e.g. Compose / React / FastAPI>
+- **Persistence:** <e.g. Room / Postgres / SQLite>
+- **Build:** <e.g. Gradle / npm / uv>
+- **Runtime versions:** <e.g. Android API 24+, Node 20, Python 3.12>
+
+---
+
+## Data flow
+
+<!-- The main pipeline through the system. Replace nodes with real components. -->
+
+```mermaid
+flowchart LR
+    Input[input source] --> Process[processor]
+    Process --> Store[(storage)]
+    Process --> Output[output sink]
+```
+
+Narrative: <walk the diagram in 2–4 sentences>.
+
+---
+
+## Sources / inputs
+
+<!-- If the system has pluggable sources (e.g. ActivitySource, DataReader, Adapter), enumerate them here. Delete the section if not applicable. -->
+
+| Source | Status | Reads | Permissions / credentials |
+|---|---|---|---|
+| <source> | <implemented/planned> | <what> | <requirements> |
+
+---
+
+## Storage
+
+<!-- Schema, persistence layer, migration policy. erDiagram if relational. -->
+
+```mermaid
+erDiagram
+    TABLE_A {
+        id pk
+        field type
+    }
+```
+
+---
+
+## Dependency injection / wiring
+
+<!-- Modules, scopes, what's provided where. Drop this section if the project doesn't use a DI framework. -->
+
+---
+
+## External integrations
+
+<!-- Third-party APIs, OS-level integrations, auth providers. -->
+
+---
+
+## Decision log (ADR-lite)
+
+Append-only. Latest entries on top.
+
+### {{TODAY}} — Project bootstrap
+
+**Context:** Initial scaffold from `srix-scaffold`.
+**Decision:** Adopt spec-driven workflow with `architect` / `developer` / `tester` / `spec-creator` / `plan-creator` agents.
+**Alternatives considered:** Ad-hoc development without scaffolding.
+**Why:** Captures decisions, separates WHAT/HOW, and gives reviewers a consistent surface.
+**Consequences:** All new technical decisions are recorded here. Specs and plans live under `specs/`.

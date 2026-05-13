@@ -1,0 +1,58 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project Overview
+
+{{PROJECT_NAME}} — {{PROJECT_ONE_LINER}}
+
+For full product scope see [`specs/REQUIREMENTS.md`](specs/REQUIREMENTS.md). For phase sequencing see [`specs/ROADMAP.md`](specs/ROADMAP.md). For current implementation state see [`specs/STATUS.md`](specs/STATUS.md). For technical architecture see [`architecture/architecture.md`](architecture/architecture.md).
+
+## Workflow
+
+This project uses a spec-driven workflow with specialist agents under [`agents/`](agents/):
+
+| Agent | Role |
+|---|---|
+| [`spec-creator`](agents/spec-creator.md) | Writes `specs/<task>-spec.md` — the WHAT and WHY, product-team view |
+| [`plan-creator`](agents/plan-creator.md) | Writes `specs/<task>-plan.md` — the HOW, given an existing spec |
+| [`architect`](agents/architect.md) | Reviews plans against `architecture/architecture.md`; updates the doc post-merge |
+| [`developer`](agents/developer.md) | Implements an approved plan in an isolated git worktree |
+| [`tester`](agents/tester.md) | Authors / runs / audits tests, 1:1 mapped to spec acceptance criteria |
+
+The normal flow for a new task: **spec-creator → plan-creator → architect (review) → developer → tester → architect (update)**.
+
+## Development Commands
+
+### Building
+- `{{BUILD_COMMAND}}` — build the project
+
+### Testing
+- `{{TEST_COMMAND}}` — run unit tests
+- `{{INTEGRATION_TEST_COMMAND}}` — run integration tests (if applicable)
+
+### Code Quality
+- `{{LINT_COMMAND}}` — run lint
+
+### Verification gate
+- `{{VERIFY_COMMAND}}` — canonical pre-merge check. Chains unit tests, integration tests, and lint. Fails fast.
+
+## Project Structure
+
+{{PROJECT_STRUCTURE_NOTES}}
+
+## Build Configuration
+
+{{BUILD_CONFIG_NOTES}}
+
+## Key Dependencies
+
+{{KEY_DEPENDENCIES}}
+
+## Testing Setup
+
+- **Tier 1 — Unit:** Pure-logic tests with all collaborators fakeable in-process.
+- **Tier 2 — Integration:** Real stack, external boundaries faked.
+- **Tier 3 — Manual-deferred:** Anything that requires non-automatable interaction; the tester agent names the manual procedure in its report.
+
+See [`agents/tester.md`](agents/tester.md) for tier-picking rules and the spec ↔ test linking convention.

@@ -1,0 +1,10 @@
+{
+  "name": "srix-scaffold",
+  "version": "0.1.0",
+  "description": "Spec-driven project scaffolding: agents (architect/developer/tester/spec-creator/plan-creator), architecture/design/specs folder conventions, and a CLAUDE.md tying it together. Inflated into a project via /scaffold-init.",
+  "author": {
+    "name": "Srix",
+    "email": "thehardcoder@gmail.com"
+  },
+  "homepage": "https://github.com/srix/srix-scaffold"
+}
