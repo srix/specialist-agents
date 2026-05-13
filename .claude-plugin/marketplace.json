@@ -1,0 +1,14 @@
+{
+  "name": "srix-scaffold",
+  "owner": {
+    "name": "Srix",
+    "email": "thehardcoder@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "srix-scaffold",
+      "source": "./",
+      "description": "Spec-driven project scaffolding: agents (architect/developer/tester/spec-creator/plan-creator), architecture/design/specs folder conventions, and a CLAUDE.md tying it together. Inflated into a project via /srix-scaffold."
+    }
+  ]
+}

@@ -55,12 +55,14 @@ Each agent has a sharp role:
 
 ## Install (local, for yourself)
 
-While iterating on the scaffold:
+The repo doubles as its own marketplace (`.claude-plugin/marketplace.json`), so installation is two commands:
 
 ```bash
-# point Claude Code at the local plugin
-/plugin install file:///media/workdir/workspace/srix-scaffold
+/plugin marketplace add /media/workdir/workspace/srix-scaffold
+/plugin install srix-scaffold@srix-scaffold
 ```
+
+(The `@srix-scaffold` suffix names the marketplace; both happen to be called `srix-scaffold`, hence the doubled name.)
 
 Then in any project:
 
@@ -75,8 +77,8 @@ The skill prompts for project name, stack, build commands, then inflates the tem
 Once published:
 
 ```bash
-/plugin marketplace add github:srix/srix-scaffold
-/plugin install srix-scaffold
+/plugin marketplace add srix/srix-scaffold
+/plugin install srix-scaffold@srix-scaffold
 ```
 
 Tag stable versions so colleagues can pin (`v0.1.0`, `v0.2.0`) while you keep iterating on `main`.
