@@ -6,7 +6,7 @@ Reference implementation: [`lived-app`](https://github.com/srix/lived-app) — t
 
 ## What you get
 
-Run `/scaffold-init` inside a project directory and the following lands in `cwd`:
+Run `/srix-scaffold` inside a project directory and the following lands in `cwd`:
 
 ```
 .
@@ -65,7 +65,7 @@ While iterating on the scaffold:
 Then in any project:
 
 ```bash
-/scaffold-init
+/srix-scaffold
 ```
 
 The skill prompts for project name, stack, build commands, then inflates the templates into `cwd`. It refuses to overwrite existing files by default.
@@ -76,7 +76,7 @@ Once published:
 
 ```bash
 /plugin marketplace add github:srix/srix-scaffold
-/plugin install scaffold-init
+/plugin install srix-scaffold
 ```
 
 Tag stable versions so colleagues can pin (`v0.1.0`, `v0.2.0`) while you keep iterating on `main`.
@@ -101,12 +101,12 @@ Semver, loosely:
 - **Minor** — new agent, new template file, new skill, new placeholder.
 - **Major** — folder shape change, breaking placeholder rename, removed agent.
 
-Existing inflated projects only see plugin upgrades if the user re-runs `/scaffold-init` — and even then only for new files (existing files are skipped by collision policy).
+Existing inflated projects only see plugin upgrades if the user re-runs `/srix-scaffold` — and even then only for new files (existing files are skipped by collision policy).
 
 ## Files
 
 - `.claude-plugin/plugin.json` — plugin metadata.
-- `skills/scaffold-init/SKILL.md` — the `/scaffold-init` skill.
+- `skills/srix-scaffold/SKILL.md` — the `/srix-scaffold` skill.
 - `agents/*.md` — copied verbatim into the user's project (with `{{PROJECT_NAME}}` / `{{VERIFY_COMMAND}}` substituted).
 - `templates/**/*.tmpl` — inflated with placeholder substitution; `.tmpl` suffix stripped on copy.
 - `CHANGELOG.md` — one line per release.

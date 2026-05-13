@@ -1,9 +1,9 @@
 ---
-name: scaffold-init
+name: srix-scaffold
 description: Inflate the srix-scaffold spec-driven workflow (agents, architecture/, design/, specs/, CLAUDE.md) into the current working directory. Use when the user wants to bootstrap a new project — or add the scaffold to an existing one — with the spec → plan → architect → developer → tester loop.
 ---
 
-# scaffold-init
+# srix-scaffold
 
 You are inflating the srix-scaffold into the user's current working directory. The scaffold is a spec-driven workflow: agents under `agents/`, living technical doc under `architecture/`, design system under `design/`, specs and roadmap under `specs/`, and a `CLAUDE.md` tying them together.
 
