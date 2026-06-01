@@ -166,4 +166,3 @@ Existing inflated projects only see plugin upgrades if the user re-runs `/specia
 - `agents/*.md` — copied verbatim into the user's project (with `{{PROJECT_NAME}}` / `{{VERIFY_COMMAND}}` substituted).
 - `templates/**/*.tmpl` — inflated with placeholder substitution; `.tmpl` suffix stripped on copy.
 - `CHANGELOG.md` — one line per release.
-```
