@@ -1,9 +1,9 @@
 # Installing the specialist-agents workflow
 
-## 1. Make sure you have access
+## 1. Make sure you can reach GitHub
 
-This is a **private** repo. Ask Srix to add you as a collaborator on `srix/specialist-agents`,
-and confirm you can reach GitHub (`gh auth status` or a test `git clone` works).
+`srix/specialist-agents` is a **public** repo — no access request needed. Just confirm you
+can reach GitHub (`gh auth status` or a test `git clone` works).
 
 ## 2. Register the marketplace and install the plugin
 
