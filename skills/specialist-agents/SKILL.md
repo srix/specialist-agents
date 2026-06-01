@@ -22,6 +22,8 @@ ${CLAUDE_PLUGIN_ROOT}/
     ├── design/
     │   ├── README.md.tmpl
     │   └── design-system.md.tmpl
+    ├── sdlc/
+    │   └── flow.md.tmpl
     └── specs/
         ├── REQUIREMENTS.md.tmpl
         ├── ROADMAP.md.tmpl
@@ -102,6 +104,7 @@ Created:
 - specs/ROADMAP.md
 - specs/STATUS.md
 - specs/ui-design-brief.md
+- sdlc/flow.md
 
 Next steps:
 1. Edit `architecture/architecture.md` — fill in the Vision, Layers, Tech stack, and Data flow sections.

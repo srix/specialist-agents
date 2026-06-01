@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.3.0 — 2026-06-01
+
+- **New doc: `sdlc/flow.md`** (template) — a dedicated, visual SDLC document inflated into
+  every scaffolded project. Left-to-right Mermaid diagram of the lifecycle: the spec is
+  authored in `main`, the rest of the pipeline (designer → plan → architect review →
+  developer → tester → architect doc-update → final commit) runs **autonomously inside a
+  sandbox**, with a single human review at merge. Documents the `main`↔sandbox boundary and
+  the sandbox lifecycle (recommends `agent-sandbox`, but the sandbox is not required). New
+  top-level `sdlc/` folder, room for future flow variants.
+- **Developer drops git-worktree gymnastics.** It now works on the current branch (the
+  sandbox branch already exists); as a fallback, if it runs on `main` it creates a
+  `task/<slug>` branch first. README/CLAUDE.md updated; the README workflow is now the same
+  Mermaid diagram.
+
 ## 0.2.0 — 2026-06-01
 
 - **Renamed** the plugin `srix-scaffold` → `specialist-agents` — the plugin id, the

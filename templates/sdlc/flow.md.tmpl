@@ -1,0 +1,153 @@
+# {{PROJECT_NAME}} — SDLC Flow
+
+**Status:** Living document
+**Last updated:** {{TODAY}}
+
+This is the development lifecycle for {{PROJECT_NAME}}: how a task travels from an idea to
+merged code. The shape is deliberate — the **spec is authored in `main`**, then the rest of
+the pipeline runs **autonomously inside a sandbox**, and the **only human touchpoint is a
+single review just before the final commit**, when there is a working prototype to look at.
+
+> This is the current default flow. As the project matures, additional flows (different
+> autonomy levels) will live next to this file under `sdlc/`.
+
+---
+
+## The flow
+
+```mermaid
+flowchart LR
+    subgraph main1["main repo"]
+        spec["spec-creator<br/>writes the spec"]
+    end
+
+    spawn(["⎇ spawn sandbox<br/>branch sandbox/&lt;name&gt;"])
+
+    subgraph sandbox["sandbox · all of this runs here"]
+        direction LR
+        subgraph devloop["development loop"]
+            direction LR
+            designer["designer<br/>UI/UX only"]
+            plan["plan-creator<br/>writes the plan"]
+            arev["architect<br/>review the plan"]
+            dev["developer<br/>implement"]
+            test["tester<br/>tests vs acceptance criteria"]
+            adoc["architect<br/>update technical docs"]
+            designer --> plan --> arev --> dev --> test --> adoc
+        end
+        review{"human review<br/>artifacts + working prototype"}
+        commit(["final commit"])
+        adoc --> review
+        review -- "approved" --> commit
+        review -- "changes" --> devloop
+    end
+
+    subgraph main2["main repo"]
+        merge(["merge → main<br/>delete sandbox"])
+    end
+
+    spec --> spawn --> designer
+    commit --> merge
+```
+
+The diagram reads left to right. Only `spec-creator` runs in `main`. Inside the sandbox the
+agents form an autonomous **development loop**; its output goes to a single **human review**,
+which either sends changes **back into the loop** (at whatever step they touch) or approves
+— and only then is the **final commit** made. Everything except the final merge happens
+inside the sandbox.
+
+---
+
+## The boundary: `main` vs sandbox
+
+| Stage | Where it runs | Produces |
+|---|---|---|
+| spec-creator | **main** | `specs/<task>-spec.md` |
+| designer (UI/UX only) | sandbox | `specs/<task>-design.md` + `design/mockups/<task>/` |
+| plan-creator | sandbox | `specs/<task>-plan.md` |
+| architect (review) | sandbox | verdict on the plan; ADR entry if needed |
+| developer | sandbox | the implementation on the sandbox branch |
+| tester | sandbox | tests + per-AC report |
+| architect (update) | sandbox | updated `architecture/architecture.md` |
+| human review | sandbox | approval, or change requests that re-run earlier steps |
+| final commit | sandbox | the committed deliverable on the sandbox branch |
+| merge + delete sandbox | **main** | the merged result on `main` |
+
+The spec is the contract handed into the sandbox. Everything the sandbox produces stays on
+its branch until you merge — so `main` only ever sees reviewed, working results.
+
+---
+
+## Sandbox lifecycle
+
+1. **Spawn.** After the spec is written, create a sandbox on a fresh branch
+   (`sandbox/<name>`). The recommended tool is **`agent-sandbox`** — its VS Code task **Spawn
+   Agent Sandbox** clones the repo into `agent-sandboxes/<name>/`, branches, and opens an
+   isolated dev container. **It is not required**: a manual `git clone` + branch, or a remote
+   agent
+   (e.g. `claude --remote`), works just as well. The flow only assumes "an isolated branch
+   you can throw away."
+2. **Run.** The agents execute the pipeline above autonomously inside the sandbox, ending
+   with a working prototype and all artifacts on the sandbox branch.
+3. **Review.** You open the finished sandbox and review the **working prototype** plus the
+   artifacts (spec, design, mockups, plan, tests, updated architecture). Reviewing a running
+   prototype is far easier than reviewing a plan on paper.
+4. **Finalize & merge.** Once you're convinced, the **final commit** is made and the sandbox
+   branch is merged into `main` (agent-sandbox: **Merge Agent Sandbox**). If you wanted
+   changes instead, the agents re-run on the same branch (see below) and you review again —
+   nothing is committed as final until you're satisfied.
+5. **Delete.** Tear the sandbox down (**Remove Agent Sandbox**). It was always disposable.
+
+---
+
+## The agents, in order
+
+- **spec-creator** — the WHAT/WHY, in `main`, before the sandbox exists.
+- **designer** — UX/UI thinking for user-facing tasks: surfaces, flows, states, and HTML
+  mockups. Skipped for backend/CLI-only tasks.
+- **plan-creator** — the HOW: file-level changes, reuse, verification steps.
+- **architect (review)** — gates the plan against `architecture/architecture.md`.
+- **developer** — implements the approved plan on the sandbox branch.
+- **tester** — maps every acceptance criterion to a test and runs them.
+- **architect (update)** — distills what changed back into `architecture/architecture.md`.
+
+The architect appears twice: once to **review the plan**, once to **update the docs** from
+the final changes.
+
+---
+
+## Review & merge
+
+There are no approval gates mid-pipeline. The review happens **once**, against a finished,
+running result, and **before the final commit** — there's no point committing, reviewing,
+then committing again:
+
+- If it's good → **final commit** → merge → delete the sandbox.
+- If it needs changes → it goes **back into the development loop**, re-entering at whatever
+  step the feedback touches (not necessarily back at the designer), on the **same branch** —
+  the sandbox isn't thrown away until you're satisfied — then you review again.
+
+This is the single intentional human-in-the-loop point. Future flow variants may move,
+remove, or add to it.
+
+---
+
+## Without a sandbox (fallback)
+
+The sandbox is a convenience, not a hard dependency. The same pipeline runs directly in the
+repo, as long as task work happens on a **dedicated branch** rather than `main`:
+
+- If the developer finds itself on `main`, it creates a working branch (`task/<task-slug>`)
+  before making any change.
+- You review the branch and merge it the usual way.
+
+The only thing the flow insists on is: **`main` never receives unreviewed task work.**
+
+---
+
+## Future: variant flows
+
+Because the pipeline already runs autonomously inside a sandbox, flows can be composed at
+different **autonomy levels** — for example a stricter flow that adds an explicit pre-merge
+gate, or a fully unattended flow that merges on green tests with no human review. Each such
+variant will be its own file under `sdlc/`, with this document as the default.

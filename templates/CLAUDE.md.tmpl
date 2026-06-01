@@ -18,10 +18,12 @@ This project uses a spec-driven workflow with specialist agents under [`agents/`
 | [`designer`](agents/designer.md) | UI/UX tasks only: writes `specs/<task>-design.md` + HTML mockups under `design/mockups/` — surfaces, flows, states, design-system decisions |
 | [`plan-creator`](agents/plan-creator.md) | Writes `specs/<task>-plan.md` — the HOW, given an existing spec |
 | [`architect`](agents/architect.md) | Reviews plans against `architecture/architecture.md`; updates the doc post-merge |
-| [`developer`](agents/developer.md) | Implements an approved plan in an isolated git worktree |
+| [`developer`](agents/developer.md) | Implements an approved plan on the sandbox branch |
 | [`tester`](agents/tester.md) | Authors / runs / audits tests, 1:1 mapped to spec acceptance criteria |
 
 The normal flow for a new task: **spec-creator → designer (UI/UX tasks only) → plan-creator → architect (review) → developer → tester → architect (update)**.
+
+See [`sdlc/flow.md`](sdlc/flow.md) for the full lifecycle as a left-to-right diagram — the `main` vs sandbox boundary, the autonomous in-sandbox pipeline, and the single review-at-merge step.
 
 ### Working with community skills
 
@@ -29,7 +31,7 @@ These agents define the **roles**; they are built to compose with community **sk
 
 | Pack | Used by | For |
 |---|---|---|
-| `superpowers` | all agents | brainstorming, writing-plans, TDD, systematic-debugging, verification-before-completion, code review, git worktrees |
+| `superpowers` | all agents | brainstorming, writing-plans, TDD, systematic-debugging, verification-before-completion, code review |
 | `frontend-design` | designer | distinctive, production-grade UI |
 | Code-craft packs — e.g. `impeccable`, `mattpocock` | plan-creator, developer | language idioms and code quality (esp. TypeScript) |
 

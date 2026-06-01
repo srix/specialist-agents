@@ -18,7 +18,7 @@ Run `/specialist-agents` inside a project directory and the following lands in `
 │   ├── designer.md          ← UX/UI thinking for user-facing specs (the LOOK & FEEL)
 │   ├── plan-creator.md      ← writes specs/<task>-plan.md (the HOW)
 │   ├── architect.md         ← owns architecture/architecture.md; reviews plans, updates post-merge
-│   ├── developer.md         ← implements an approved plan in a git worktree
+│   ├── developer.md         ← implements an approved plan on the sandbox branch
 │   └── tester.md            ← authors / runs / audits tests 1:1 against acceptance criteria
 ├── architecture/
 │   ├── architecture.md      ← living technical doc with ADR-style decision log
@@ -28,6 +28,8 @@ Run `/specialist-agents` inside a project directory and the following lands in `
 │   ├── design-system.md     ← tokens, type, spacing, motion, components, decisions
 │   ├── mockups/             ← self-contained HTML mockups from the designer agent
 │   └── exports/             ← dated snapshots from an external design tool (optional)
+├── sdlc/
+│   └── flow.md              ← SDLC flow — Mermaid diagram + sandbox lifecycle
 └── specs/
     ├── REQUIREMENTS.md      ← product-level FRs / NFRs
     ├── ROADMAP.md           ← phased plan with entry/exit criteria
@@ -37,16 +39,41 @@ Run `/specialist-agents` inside a project directory and the following lands in `
 
 ## The workflow
 
-For each task:
+The spec is authored in `main`; everything else — build, your review, and the final commit — happens inside a sandbox, reviewed once just before that commit. Only the merge crosses back to `main`. Scaffolded projects get this as [`sdlc/flow.md`](templates/sdlc/flow.md.tmpl).
 
-```
-spec-creator   →   designer (UI/UX tasks only)   →   plan-creator   →   architect (review)
-                                                                                 ↓
-                                                                 developer (in worktree)
-                                                                                 ↓
-                                                                             tester
-                                                                                 ↓
-                                                                      architect (update doc)
+```mermaid
+flowchart LR
+    subgraph main1["main repo"]
+        spec["spec-creator<br/>writes the spec"]
+    end
+
+    spawn(["⎇ spawn sandbox<br/>branch sandbox/&lt;name&gt;"])
+
+    subgraph sandbox["sandbox · all of this runs here"]
+        direction LR
+        subgraph devloop["development loop"]
+            direction LR
+            designer["designer<br/>UI/UX only"]
+            plan["plan-creator"]
+            arev["architect<br/>review the plan"]
+            dev["developer<br/>implement"]
+            test["tester"]
+            adoc["architect<br/>update technical docs"]
+            designer --> plan --> arev --> dev --> test --> adoc
+        end
+        review{"human review<br/>artifacts + working prototype"}
+        commit(["final commit"])
+        adoc --> review
+        review -- "approved" --> commit
+        review -- "changes" --> devloop
+    end
+
+    subgraph main2["main repo"]
+        merge(["merge → main<br/>delete sandbox"])
+    end
+
+    spec --> spawn --> designer
+    commit --> merge
 ```
 
 Each agent has a sharp role:
@@ -55,14 +82,14 @@ Each agent has a sharp role:
 - **designer** (UI/UX tasks only) turns the spec into surfaces, flows, interaction states, and design-system decisions — producing `specs/<task>-design.md` and self-contained HTML mockups under `design/mockups/`. No code.
 - **plan-creator** answers HOW: file-level changes, reusable code to leverage, verification steps.
 - **architect** gates plans against `architecture.md` and updates the doc after merges.
-- **developer** executes the plan in an isolated git worktree, reports back with a branch.
+- **developer** executes the plan on the sandbox branch (no worktree gymnastics), reports back with a branch.
 - **tester** maps every acceptance criterion to a test (or a manual-deferred procedure), and runs the full audit on demand.
 
 ## Composes with your skills
 
 The agents define the **roles**; they're built to lean on community **skills** for technique. Each agent file has a *Leverage available skills* section nudging it toward the relevant packs when they're installed — and the agents stay fully functional without any:
 
-- **`superpowers`** — brainstorming, writing-plans, TDD, systematic-debugging, verification-before-completion, code review, git worktrees (used across every agent).
+- **`superpowers`** — brainstorming, writing-plans, TDD, systematic-debugging, verification-before-completion, code review (used across every agent).
 - **`frontend-design`** — distinctive, production-grade UI (designer).
 - **Code-craft packs** like **`impeccable`** and **`mattpocock`** — language idioms and quality, especially TypeScript (plan-creator, developer).
 
