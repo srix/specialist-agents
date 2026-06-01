@@ -47,7 +47,7 @@ Before asking anything else:
 
 Ask one focused question at a time using `AskUserQuestion`. Don't batch into a giant form. Capture:
 
-1. **Project name** — display name used in headers (e.g. "Lived"). Free text.
+1. **Project name** — display name used in headers (e.g. "Acme"). Free text.
 2. **One-liner** — single sentence describing what the project does. Used in `CLAUDE.md` and `architecture.md` and `REQUIREMENTS.md`.
 3. **Stack** — pick one or describe:
    - Android (Kotlin + Compose + Gradle)

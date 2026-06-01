@@ -47,7 +47,7 @@
 
 ## 0.1.0 — 2026-05-13
 
-Initial extraction from `lived-app`.
+Initial extraction from an internal reference app.
 
 - 5 agents: spec-creator, plan-creator, architect, developer, tester.
 - Templates for `CLAUDE.md`, `architecture/{architecture,local-development}.md`, `design/{README,design-system}.md`, `specs/{REQUIREMENTS,ROADMAP,STATUS,ui-design-brief}.md`.

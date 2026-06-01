@@ -4,8 +4,6 @@ A Claude Code plugin that drops a spec-driven workflow into any new (or existing
 
 **What this is — and isn't.** Unlike always-on skill layers you wear over every project, `specialist-agents` is a *one-shot inflation*: a fixed roster of sharp, single-responsibility agents dropped into one repo and tuned for your team. The agents live in the project's `agents/` folder. You invoke a specialist when a task calls for it — you don't run them all the time.
 
-Reference implementation: [`lived-app`](https://github.com/srix/lived-app) — the project this scaffold was extracted from.
-
 ## What you get
 
 Run `/specialist-agents:setup` inside a project directory and the following lands in `cwd`:
@@ -109,16 +107,16 @@ specialist-agents is a plugin because it ships more than one thing:
 
 A bare skill couldn't register the subagents or give you the marketplace/versioning. (The `setup` skill is the one piece that *could* also be published standalone via the `skills` CLI if cross-agent reach is ever wanted.)
 
-## Install (local, for yourself)
+## Install
 
 The repo doubles as its own marketplace (`.claude-plugin/marketplace.json`), so installation is two commands:
 
 ```bash
-/plugin marketplace add /media/workdir/workspace/srix-scaffold
+/plugin marketplace add srix/specialist-agents
 /plugin install specialist-agents@specialist-agents
 ```
 
-The first command registers the repo folder as a marketplace; the second installs the plugin from it. The `@specialist-agents` suffix names the marketplace (set in `marketplace.json`), and the plugin is also called `specialist-agents` — hence the doubled name. (The repo folder itself is still `srix-scaffold`; that's just where the files live.)
+The first command registers the GitHub repo as a marketplace; the second installs the plugin from it. The `@specialist-agents` suffix names the marketplace (set in `marketplace.json`), and the plugin is also called `specialist-agents` — hence the doubled name. Tag stable versions so you can pin (`v0.4.0`, `v0.5.0`) while iterating on `main`.
 
 Then in any project:
 
@@ -128,16 +126,16 @@ Then in any project:
 
 The skill prompts for project name, stack, build commands, then inflates the templates into `cwd`. It refuses to overwrite existing files by default.
 
-## Install (for colleagues, from GitHub)
+### Local development install
 
-Once published:
+When hacking on the plugin itself, point the marketplace at your local checkout instead of GitHub so in-progress edits are live:
 
 ```bash
-/plugin marketplace add srix/specialist-agents
+/plugin marketplace add /path/to/specialist-agents
 /plugin install specialist-agents@specialist-agents
 ```
 
-Tag stable versions so colleagues can pin (`v0.1.0`, `v0.2.0`) while you keep iterating on `main`.
+Same two steps — the first just registers the repo folder on disk rather than the GitHub slug.
 
 ## Maintenance — the harvest loop
 
@@ -148,7 +146,7 @@ You'll notice improvements while *using* the agents in a real project — that's
 3. Bump the version (`plugin.json`), write a one-line `CHANGELOG.md` entry.
 4. Tag.
 
-Don't edit the plugin from inside a real project's directory — it muddles the source of truth. Open the `srix-scaffold/` repo in its own editor window for plugin work.
+Don't edit the plugin from inside a real project's directory — it muddles the source of truth. Open the `specialist-agents/` repo in its own editor window for plugin work.
 
 The opposite direction (plugin → real project) is harder: existing projects don't auto-upgrade. Treat the scaffold as a one-shot inflation, not a runtime dependency. When you want new patterns in an old project, manually port what you want from the plugin.
 
