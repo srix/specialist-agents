@@ -124,7 +124,7 @@ Then in any project:
 /specialist-agents:setup
 ```
 
-The skill prompts for project name, stack, build commands, then inflates the templates into `cwd`. It refuses to overwrite existing files by default.
+The skill prompts for project name, stack, build commands, then inflates the templates into `cwd` — so make sure you're in the right folder. It refuses to overwrite existing files by default. After inflation, fill in the `<!-- TODO -->` placeholders it leaves in `architecture/architecture.md`, `specs/REQUIREMENTS.md`, and `CLAUDE.md`.
 
 ### Local development install
 
