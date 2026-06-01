@@ -1,7 +1,7 @@
 {
-  "name": "srix-scaffold",
-  "version": "0.1.0",
-  "description": "Spec-driven project scaffolding: agents (architect/developer/tester/spec-creator/plan-creator), architecture/design/specs folder conventions, and a CLAUDE.md tying it together. Inflated into a project via /srix-scaffold.",
+  "name": "specialist-agents",
+  "version": "0.2.0",
+  "description": "A roster of sharp, single-responsibility specialist agents (spec-creator, designer, plan-creator, architect, developer, tester) plus architecture/design/specs folder conventions and a CLAUDE.md, inflated into one project via /specialist-agents. A one-shot scaffold for your team — not an always-on skill layer.",
   "author": {
     "name": "Srix",
     "email": "thehardcoder@gmail.com"

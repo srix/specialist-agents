@@ -95,6 +95,12 @@ Omit the section entirely if there are none worth calling out.
 4. Keep specs concise — a task spec is a one-pager, not a design document. If a section needs more than ~6 bullets, the task is probably too big and should be split.
 5. After writing, briefly summarize back to the user what was captured and flag any open questions.
 
+## Leverage available skills
+
+This agent defines the *role*; community skills supply the *technique*. If these skills are installed, prefer them — they are optional, and the agent works without them.
+
+- **`superpowers:brainstorming`** — before specifying anything non-trivial, run a brainstorm to explore the user's real intent, requirements, and edge cases. A spec built on a genuine brainstorm is sharper than one written cold.
+
 ## Style rules
 
 - Plain markdown, no emojis unless the user requests them.

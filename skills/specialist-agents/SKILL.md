@@ -1,15 +1,15 @@
 ---
-name: srix-scaffold
-description: Inflate the srix-scaffold spec-driven workflow (agents, architecture/, design/, specs/, CLAUDE.md) into the current working directory. Use when the user wants to bootstrap a new project — or add the scaffold to an existing one — with the spec → plan → architect → developer → tester loop.
+name: specialist-agents
+description: Inflate the specialist-agents spec-driven workflow (agents, architecture/, design/, specs/, CLAUDE.md) into the current working directory. Use when the user wants to bootstrap a new project — or add the scaffold to an existing one — with the spec → designer (UI/UX) → plan → architect → developer → tester loop.
 ---
 
-# srix-scaffold
+# specialist-agents
 
-You are inflating the srix-scaffold into the user's current working directory. The scaffold is a spec-driven workflow: agents under `agents/`, living technical doc under `architecture/`, design system under `design/`, specs and roadmap under `specs/`, and a `CLAUDE.md` tying them together.
+You are inflating the specialist-agents scaffold into the user's current working directory. It drops a roster of sharp, single-responsibility specialist agents into one project: agents under `agents/`, a living technical doc under `architecture/`, a design system under `design/`, specs and roadmap under `specs/`, and a `CLAUDE.md` tying them together. It is a one-shot inflation, not an always-on skill layer — the agents live in the project and you invoke a specialist when a task calls for it.
 
 ## Plugin layout (where you read from)
 
-The plugin's files are at `${CLAUDE_PLUGIN_ROOT}` — typically `~/.claude/plugins/<install-id>/srix-scaffold/`. The layout you care about:
+The plugin's files are at `${CLAUDE_PLUGIN_ROOT}` — typically `~/.claude/plugins/<install-id>/specialist-agents/`. The layout you care about:
 
 ```
 ${CLAUDE_PLUGIN_ROOT}/
@@ -79,8 +79,8 @@ After inflation, tell the user which sections still have placeholders and which 
    - Apply substitutions.
    - Write to the corresponding path in cwd, preserving subdirectory layout.
    - Honor the collision policy from step 1.
-4. Copy `${CLAUDE_PLUGIN_ROOT}/agents/*.md` verbatim into `<cwd>/agents/`, applying `{{PROJECT_NAME}}` and `{{VERIFY_COMMAND}}` substitutions but otherwise unchanged.
-5. Create empty placeholder dirs: `design/exports/`.
+4. Copy `${CLAUDE_PLUGIN_ROOT}/agents/*.md` verbatim into `<cwd>/agents/`, applying `{{PROJECT_NAME}}` and `{{VERIFY_COMMAND}}` substitutions but otherwise unchanged. (All agent files are copied, so the count grows automatically as agents are added.)
+5. Create empty placeholder dirs: `design/exports/` and `design/mockups/` (the designer agent writes self-contained HTML mockups under `design/mockups/`).
 
 ### Step 4 — Report
 
@@ -91,12 +91,13 @@ Scaffold initialized.
 
 Created:
 - CLAUDE.md
-- agents/ (5 files)
+- agents/ (6 files)
 - architecture/architecture.md
 - architecture/local-development.md
 - design/README.md
 - design/design-system.md
 - design/exports/  (empty)
+- design/mockups/  (empty)
 - specs/REQUIREMENTS.md
 - specs/ROADMAP.md
 - specs/STATUS.md
@@ -109,7 +110,7 @@ Next steps:
 4. Write your first task spec via the spec-creator agent.
 
 Open `agents/` for role definitions; the normal flow for a new task is
-spec-creator → plan-creator → architect (review) → developer → tester → architect (update).
+spec-creator → designer (UI/UX tasks only) → plan-creator → architect (review) → developer → tester → architect (update).
 ```
 
 ## Stop conditions

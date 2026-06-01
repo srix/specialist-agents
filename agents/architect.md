@@ -116,6 +116,13 @@ Rules:
 **Consequences:** What this enables and what it constrains.
 ```
 
+## Leverage available skills
+
+This agent defines the *role*; community skills supply the *technique*. If these skills are installed, prefer them — they are optional, and the agent works without them.
+
+- **`superpowers:brainstorming`** — for load-bearing architectural decisions, explore alternatives before you commit one to the decision log.
+- **`superpowers:receiving-code-review` / `superpowers:requesting-code-review`** — when gating a plan, apply the same rigor a good review does: verify against the architecture, don't rubber-stamp.
+
 ## Style rules
 
 - `architecture.md` is the *current* state, not a history book. Move historical context into the decision log.

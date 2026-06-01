@@ -15,12 +15,25 @@ This project uses a spec-driven workflow with specialist agents under [`agents/`
 | Agent | Role |
 |---|---|
 | [`spec-creator`](agents/spec-creator.md) | Writes `specs/<task>-spec.md` — the WHAT and WHY, product-team view |
+| [`designer`](agents/designer.md) | UI/UX tasks only: writes `specs/<task>-design.md` + HTML mockups under `design/mockups/` — surfaces, flows, states, design-system decisions |
 | [`plan-creator`](agents/plan-creator.md) | Writes `specs/<task>-plan.md` — the HOW, given an existing spec |
 | [`architect`](agents/architect.md) | Reviews plans against `architecture/architecture.md`; updates the doc post-merge |
 | [`developer`](agents/developer.md) | Implements an approved plan in an isolated git worktree |
 | [`tester`](agents/tester.md) | Authors / runs / audits tests, 1:1 mapped to spec acceptance criteria |
 
-The normal flow for a new task: **spec-creator → plan-creator → architect (review) → developer → tester → architect (update)**.
+The normal flow for a new task: **spec-creator → designer (UI/UX tasks only) → plan-creator → architect (review) → developer → tester → architect (update)**.
+
+### Working with community skills
+
+These agents define the **roles**; they are built to compose with community **skills** that supply technique. Where a skill is installed, the agents prefer it — and they stay fully functional without any. Packs that pair well:
+
+| Pack | Used by | For |
+|---|---|---|
+| `superpowers` | all agents | brainstorming, writing-plans, TDD, systematic-debugging, verification-before-completion, code review, git worktrees |
+| `frontend-design` | designer | distinctive, production-grade UI |
+| Code-craft packs — e.g. `impeccable`, `mattpocock` | plan-creator, developer | language idioms and code quality (esp. TypeScript) |
+
+Each agent's own file lists the skills most relevant to its role under **Leverage available skills**. Install the packs you want; the agents will reach for them.
 
 ## Development Commands
 

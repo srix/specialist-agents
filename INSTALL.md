@@ -1,4 +1,4 @@
-# Installing the srix-scaffold workflow
+# Installing the specialist-agents workflow
 
 ## 1. Make sure you have access
 
@@ -11,11 +11,11 @@ Run these two slash commands inside Claude Code:
 
 ```
 /plugin marketplace add srix/srix-scaffold
-/plugin install srix-scaffold@srix-scaffold
+/plugin install specialist-agents@specialist-agents
 ```
 
 The first registers the repo as a plugin marketplace; the second installs the
-`srix-scaffold` plugin *from* that marketplace (the `plugin@marketplace` syntax).
+`specialist-agents` plugin *from* that marketplace (the `plugin@marketplace` syntax).
 Restart Claude Code if prompted.
 
 ## 3. Create the scaffold in a project
@@ -23,7 +23,7 @@ Restart Claude Code if prompted.
 `cd` into the project you want to scaffold (new or existing), open Claude Code, and run:
 
 ```
-/srix-scaffold
+/specialist-agents
 ```
 
 It inflates into the **current directory**, so make sure you're in the right folder. It will:
@@ -40,5 +40,5 @@ Fill in the `<!-- TODO -->` placeholders it leaves in `architecture/architecture
 The normal per-task flow is then:
 
 ```
-spec-creator -> plan-creator -> architect (review) -> developer -> tester -> architect (update)
+spec-creator -> designer (UI/UX only) -> plan-creator -> architect (review) -> developer -> tester -> architect (update)
 ```

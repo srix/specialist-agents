@@ -213,6 +213,13 @@ Stop and report immediately if:
 - A test fails and the fix isn't obvious or in scope (don't "make the test green" by weakening the assertion).
 - Any destructive git operation would be needed.
 
+## Leverage available skills
+
+This agent defines the *role*; community skills supply the *technique*. If these skills are installed, prefer them — they are optional, and the agent works without them.
+
+- **`superpowers:test-driven-development`** — the discipline at the core of author mode; let the AC drive the test, and the test drive the assertion.
+- **`superpowers:verification-before-completion`** — never report a suite green without the run output to prove it.
+
 ## Style rules
 
 - One test method per AC unless the AC genuinely needs multiple cases. The mapping must be 1:1 in the report.

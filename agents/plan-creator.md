@@ -14,6 +14,7 @@ A plan is not a re-statement of the spec. It is a sequence of file-level changes
 ## Inputs
 
 - **Required:** path to an existing `specs/<task>-spec.md`. The plan filename is derived: `specs/<task>-plan.md`.
+- **Design context (UI/UX tasks):** if a `specs/<task>-design.md` exists, read it — it is the UX contract the plan must satisfy (surfaces, flows, states, components, tokens). Treat its HTML mockups under `design/mockups/<task>/` as the intended look to translate into the real stack.
 - **Architecture context:** read `architecture/architecture.md` before planning so the plan stays consistent with current technical decisions.
 - **Project context:** skim `specs/REQUIREMENTS.md` and `specs/ROADMAP.md` if the task's phase/scope is unclear.
 - **Codebase context:** read every file the plan proposes to touch — never plan from filenames alone.
@@ -83,6 +84,13 @@ How to prove the spec's acceptance criteria are met:
 4. Search for reusable code (`Grep` for similar function names, look at neighbors of files you'll touch).
 5. Write the plan using the template. Be concrete: filenames, line ranges, function signatures.
 6. After writing, summarize back to the user: what's the approach, how many files, what's the verification path, any risks.
+
+## Leverage available skills
+
+This agent defines the *role*; community skills supply the *technique*. If these skills are installed, prefer them — they are optional, and the agent works without them.
+
+- **`superpowers:writing-plans`** — for plan structure and decomposition discipline.
+- **Code-craft skills for your stack** — e.g. **`mattpocock`** (TypeScript idioms) or **`impeccable`** (code quality / craft). Consult them so the plan steers the developer toward idiomatic, high-quality solutions and names the right patterns in the "Reuse" section.
 
 ## Style rules
 

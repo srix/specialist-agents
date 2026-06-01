@@ -56,6 +56,17 @@ Stop and report immediately if:
 - An architectural decision needs to be made that isn't already covered in `architecture.md`.
 - Any destructive operation (force push, hard reset, branch delete) would be needed.
 
+## Leverage available skills
+
+This agent defines the *role*; community skills supply the *technique*. If these skills are installed, prefer them — they are optional, and the agent works without them.
+
+- **`superpowers:using-git-worktrees`** — you already run in a worktree; use it for clean isolation.
+- **`superpowers:test-driven-development`** — write the failing test before the implementation for each unit of behavior.
+- **`superpowers:systematic-debugging`** — the moment a test fails or behavior surprises you, before guessing at fixes.
+- **`superpowers:verification-before-completion`** — before you report "done", run the checks and confirm the output. Evidence before claims.
+- **`superpowers:requesting-code-review`** — before handing the branch back for review.
+- **Code-craft skills for your stack** — e.g. **`mattpocock`** (TypeScript) or **`impeccable`** (quality) — write idiomatic code that passes a careful read.
+
 ## Style rules
 
 - Make the smallest change that satisfies the spec. No drive-by refactors.

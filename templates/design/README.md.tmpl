@@ -1,26 +1,57 @@
 # Design
 
-This folder is the engineer-facing reference for {{PROJECT_NAME}}'s visual design. It complements — but does not duplicate — the work done in the design tool.
+This folder is the engineer-facing reference for {{PROJECT_NAME}}'s visual design. The
+`designer` agent (see [`../agents/designer.md`](../agents/designer.md)) owns it: on UI/UX
+tasks it produces per-task design briefs and self-contained HTML mockups, and it maintains
+the design system here.
 
 ## Where things live
 
 | Artifact | Location |
 |---|---|
-| **Design brief** (what we asked for) | [`../specs/ui-design-brief.md`](../specs/ui-design-brief.md) |
-| **Visual designs** (screens, components) | Design tool (Figma / Stitch / Whimsical / etc.); periodic exports under [`exports/`](#exports) |
+| **Product UI brief** (tone, surfaces, constraints) | [`../specs/ui-design-brief.md`](../specs/ui-design-brief.md) |
+| **Per-task design** (surfaces, flows, states) | `../specs/<task>-design.md` (written by the designer agent) |
+| **Visual mockups** (what screens look like) | Self-contained HTML under [`mockups/`](#mockups) — the primary, tool-independent visual artifact |
 | **Design system** (tokens, components, motion, light/dark) | [`design-system.md`](./design-system.md) |
 | **Decision log** (why we chose what) | Bottom of `design-system.md` |
+| **External tool snapshots** (optional) | [`exports/`](#exports) |
 
 ## Workflow
 
-1. Brief in [`../specs/ui-design-brief.md`](../specs/ui-design-brief.md) is the input.
-2. Iterate visually in the design tool. That tool is the source of truth for what screens look like; periodic exports land under `exports/`.
-3. Once a direction is agreed, distill the system-level decisions (tokens, type scale, components, motion) into `design-system.md`. This is what engineers consume when implementing.
-4. Each load-bearing visual decision (e.g. "stacked-bar over donut for daily breakdown") is logged in the Decision Log at the bottom of `design-system.md`, not duplicated elsewhere.
+1. The product-level brief in [`../specs/ui-design-brief.md`](../specs/ui-design-brief.md)
+   sets tone and constraints.
+2. For a UI/UX task, the **designer agent** reads the task spec and produces
+   `../specs/<task>-design.md` plus HTML mockups under `mockups/<task-slug>/`. The mockups
+   are the source of truth for what the screens look like — plain HTML + inline CSS, no
+   external tool required.
+3. System-level decisions (tokens, type scale, shared components, motion) are distilled
+   into [`design-system.md`](./design-system.md). This is what engineers consume when
+   implementing.
+4. Each load-bearing visual decision (e.g. "stacked-bar over donut for daily breakdown")
+   is logged in the Decision Log at the bottom of `design-system.md`, not duplicated
+   elsewhere.
+
+## Mockups
+
+Self-contained HTML mockups from the designer agent live under `mockups/`, one folder per
+task:
+
+```
+mockups/
+└── <task-slug>/
+    ├── home.html          ← standalone HTML + inline CSS, opens in any browser
+    ├── entry-detail.html
+    └── empty-state.html
+```
+
+Each file is framework-agnostic and dependency-free — a visual reference the developer
+translates into the real stack, not implementation code.
 
 ## Exports
 
-Snapshots from the design tool live under `exports/`. Each iteration gets its own dated folder; nothing is overwritten.
+If you *also* iterate in an external design tool (Figma / Stitch / Whimsical / etc.),
+periodic snapshots live under `exports/`. Each iteration gets its own dated folder; nothing
+is overwritten.
 
 ```
 exports/
@@ -31,4 +62,5 @@ exports/
     └── ...
 ```
 
-The dated folder name makes it easy to talk about "the 2026-05-02 export" and to keep older snapshots around for comparison.
+The dated folder name makes it easy to talk about "the 2026-05-02 export" and to keep older
+snapshots around for comparison.
