@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.4.0 — 2026-06-01
+
+- **Renamed the inflate skill `specialist-agents` → `setup`.** It is now invoked as
+  **`/specialist-agents:setup`**. Claude Code always namespaces a plugin's skills as
+  `/<plugin>:<skill>` by the skill's *directory* name (no collapse when names match), so
+  the old layout produced the redundant `/specialist-agents:specialist-agents`; `setup`
+  fixes that and reads as the action it performs.
+- Made the setup skill **user-invoke-only** (`disable-model-invocation: true`) — a
+  file-writing scaffold should be run deliberately, not auto-triggered.
+- README: added a **"Why a plugin (not just a skill)?"** section (plugin-vs-skill
+  rationale).
+- Plugin name and install command (`specialist-agents@specialist-agents`) unchanged.
+
 ## 0.3.0 — 2026-06-01
 
 - **New doc: `sdlc/flow.md`** (template) — a dedicated, visual SDLC document inflated into

@@ -1,9 +1,10 @@
 ---
-name: specialist-agents
-description: Inflate the specialist-agents spec-driven workflow (agents, architecture/, design/, specs/, CLAUDE.md) into the current working directory. Use when the user wants to bootstrap a new project — or add the scaffold to an existing one — with the spec → designer (UI/UX) → plan → architect → developer → tester loop.
+name: setup
+description: One-time setup that inflates the specialist-agents spec-driven workflow (agents, architecture/, design/, specs/, sdlc/, CLAUDE.md) into the current working directory. Run via /specialist-agents:setup to bootstrap a new project — or add the scaffold to an existing one — with the spec → designer (UI/UX) → plan → architect → developer → tester loop.
+disable-model-invocation: true
 ---
 
-# specialist-agents
+# specialist-agents — Setup
 
 You are inflating the specialist-agents scaffold into the user's current working directory. It drops a roster of sharp, single-responsibility specialist agents into one project: agents under `agents/`, a living technical doc under `architecture/`, a design system under `design/`, specs and roadmap under `specs/`, and a `CLAUDE.md` tying them together. It is a one-shot inflation, not an always-on skill layer — the agents live in the project and you invoke a specialist when a task calls for it.
 

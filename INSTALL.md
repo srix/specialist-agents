@@ -23,7 +23,7 @@ Restart Claude Code if prompted.
 `cd` into the project you want to scaffold (new or existing), open Claude Code, and run:
 
 ```
-/specialist-agents
+/specialist-agents:setup
 ```
 
 It inflates into the **current directory**, so make sure you're in the right folder. It will:

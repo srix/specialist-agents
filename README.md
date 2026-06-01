@@ -8,7 +8,7 @@ Reference implementation: [`lived-app`](https://github.com/srix/lived-app) — t
 
 ## What you get
 
-Run `/specialist-agents` inside a project directory and the following lands in `cwd`:
+Run `/specialist-agents:setup` inside a project directory and the following lands in `cwd`:
 
 ```
 .
@@ -95,6 +95,20 @@ The agents define the **roles**; they're built to lean on community **skills** f
 
 This is deliberately *additive*: `specialist-agents` orchestrates who does what; these skills sharpen how each one works.
 
+## Why a plugin (not just a skill)?
+
+A **skill** is one self-contained capability — a `SKILL.md` plus bundled files. It's simple and portable (even cross-agent via the [`skills`](https://www.skills.sh) CLI), but it's a *single* thing.
+
+A **plugin** is a versioned package that bundles *multiple* component types — skills **plus** subagents, slash commands, hooks, and MCP servers — installed via `/plugin` from a marketplace.
+
+specialist-agents is a plugin because it ships more than one thing:
+
+- **6 dispatchable subagents** (`agents/`) — only a plugin registers these as agent types you can invoke (`specialist-agents:architect`, …).
+- **the `setup` skill** (`/specialist-agents:setup`) — the one-time inflate action.
+- **templates** for the scaffolded files, plus a **versioned marketplace** so a team can pin and upgrade.
+
+A bare skill couldn't register the subagents or give you the marketplace/versioning. (The `setup` skill is the one piece that *could* also be published standalone via the `skills` CLI if cross-agent reach is ever wanted.)
+
 ## Install (local, for yourself)
 
 The repo doubles as its own marketplace (`.claude-plugin/marketplace.json`), so installation is two commands:
@@ -109,7 +123,7 @@ The first command registers the repo folder as a marketplace; the second install
 Then in any project:
 
 ```bash
-/specialist-agents
+/specialist-agents:setup
 ```
 
 The skill prompts for project name, stack, build commands, then inflates the templates into `cwd`. It refuses to overwrite existing files by default.
@@ -145,12 +159,12 @@ Semver, loosely:
 - **Minor** — new agent, new template file, new skill, new placeholder.
 - **Major** — folder shape change, breaking placeholder rename, removed agent.
 
-Existing inflated projects only see plugin upgrades if the user re-runs `/specialist-agents` — and even then only for new files (existing files are skipped by collision policy).
+Existing inflated projects only see plugin upgrades if the user re-runs `/specialist-agents:setup` — and even then only for new files (existing files are skipped by collision policy).
 
 ## Files
 
 - `.claude-plugin/plugin.json` — plugin metadata.
-- `skills/specialist-agents/SKILL.md` — the `/specialist-agents` skill.
+- `skills/setup/SKILL.md` — the `/specialist-agents:setup` skill.
 - `agents/*.md` — copied verbatim into the user's project (with `{{PROJECT_NAME}}` / `{{VERIFY_COMMAND}}` substituted).
 - `templates/**/*.tmpl` — inflated with placeholder substitution; `.tmpl` suffix stripped on copy.
 - `CHANGELOG.md` — one line per release.
