@@ -2,7 +2,7 @@
 
 ## 1. Make sure you have access
 
-This is a **private** repo. Ask Srix to add you as a collaborator on `srix/srix-scaffold`,
+This is a **private** repo. Ask Srix to add you as a collaborator on `srix/specialist-agents`,
 and confirm you can reach GitHub (`gh auth status` or a test `git clone` works).
 
 ## 2. Register the marketplace and install the plugin
@@ -10,7 +10,7 @@ and confirm you can reach GitHub (`gh auth status` or a test `git clone` works).
 Run these two slash commands inside Claude Code:
 
 ```
-/plugin marketplace add srix/srix-scaffold
+/plugin marketplace add srix/specialist-agents
 /plugin install specialist-agents@specialist-agents
 ```
 

@@ -119,7 +119,7 @@ The skill prompts for project name, stack, build commands, then inflates the tem
 Once published:
 
 ```bash
-/plugin marketplace add srix/srix-scaffold
+/plugin marketplace add srix/specialist-agents
 /plugin install specialist-agents@specialist-agents
 ```
 
